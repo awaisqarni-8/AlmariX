@@ -98,3 +98,152 @@ color:#ff6a00;
 font-weight:600;
 
 }
+.cartActions{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+.qtyBtn{
+
+width:36px;
+
+height:36px;
+
+border:none;
+
+border-radius:8px;
+
+background:#ff6a00;
+
+color:#fff;
+
+font-size:20px;
+
+cursor:pointer;
+
+}
+
+.qty{
+
+font-size:18px;
+
+font-weight:600;
+
+min-width:30px;
+
+text-align:center;
+
+}
+
+.removeBtn{
+
+padding:10px 16px;
+
+border:none;
+
+border-radius:10px;
+
+background:#ef4444;
+
+color:#fff;
+
+cursor:pointer;
+
+font-weight:600;
+
+}
+
+.summary{
+
+margin-top:30px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:20px;
+
+background:#fafafa;
+
+border-radius:15px;
+
+}
+
+.checkoutBtn{
+
+padding:16px 40px;
+
+border:none;
+
+border-radius:12px;
+
+background:#22c55e;
+
+color:#fff;
+
+font-size:18px;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="cartContainer">
+
+<h1 class="cartTitle">🛒 Shopping Cart</h1>
+
+<div class="cartItem">
+
+<div class="cartLeft">
+
+<div class="cartImage"></div>
+
+<div class="cartInfo">
+
+<h3>Wireless Earbuds</h3>
+
+<p>$29.99</p>
+
+</div>
+
+</div>
+
+<div class="cartActions">
+
+<button class="qtyBtn">-</button>
+
+<span class="qty">1</span>
+
+<button class="qtyBtn">+</button>
+
+<button class="removeBtn">Remove</button>
+
+</div>
+
+</div>
+
+<div class="summary">
+
+<h2>Total: <span id="totalPrice">$29.99</span></h2>
+
+<button class="checkoutBtn">
+
+Checkout
+
+</button>
+
+</div>
