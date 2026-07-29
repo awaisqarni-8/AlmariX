@@ -10,8 +10,6 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/12.16.0/firebas
 
 const firebaseConfig = {
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
   apiKey: "AIzaSyC7Z8E7nR-ChMsHYfBqUEYgoGAEetqtPws",
   authDomain: "almarix-aef29.firebaseapp.com",
   projectId: "almarix-aef29",
