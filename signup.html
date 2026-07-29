@@ -206,3 +206,63 @@ Already have an account?
 <a href="login.html">Login</a>
 
 </div>
+</form>
+
+</div>
+
+<script type="module">
+
+import { auth } from "./firebase.js";
+
+import {
+createUserWithEmailAndPassword,
+updateProfile
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+const form = document.getElementById("signupForm");
+
+form.addEventListener("submit", async (e) => {
+
+e.preventDefault();
+
+const name = document.getElementById("name").value.trim();
+
+const email = document.getElementById("email").value.trim();
+
+const password = document.getElementById("password").value;
+
+const confirmPassword = document.getElementById("confirmPassword").value;
+
+if (password !== confirmPassword) {
+alert("Passwords do not match.");
+return;
+}
+
+try {
+
+const userCredential = await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+await updateProfile(userCredential.user, {
+displayName: name
+});
+
+alert("Account created successfully!");
+
+window.location.href = "login.html";
+
+} catch (error) {
+
+alert(error.message);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
