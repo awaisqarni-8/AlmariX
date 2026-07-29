@@ -10,16 +10,15 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/12.16.0/firebas
 
 const firebaseConfig = {
 
-apiKey: "YOUR_API_KEY",
-
-authDomain: "YOUR_PROJECT.firebaseapp.com",
-
-projectId: "YOUR_PROJECT_ID",
-
-storageBucket: "YOUR_PROJECT.appspot.com",
-
-messagingSenderId: "YOUR_SENDER_ID",
-
-appId: "YOUR_APP_ID"
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC7Z8E7nR-ChMsHYfBqUEYgoGAEetqtPws",
+  authDomain: "almarix-aef29.firebaseapp.com",
+  projectId: "almarix-aef29",
+  storageBucket: "almarix-aef29.firebasestorage.app",
+  messagingSenderId: "637827769801",
+  appId: "1:637827769801:web:8724aaa55ddb7668b53418",
+  measurementId: "G-BN7QSZMXLV"
+};
 
 };
