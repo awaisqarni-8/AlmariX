@@ -123,3 +123,140 @@ box-shadow:0 5px 15px rgba(0,0,0,.08);
 margin-bottom:12px;
 
 }
+.profileCard p{
+
+font-size:20px;
+
+font-weight:600;
+
+color:#ff6a00;
+
+}
+
+.actionButtons{
+
+margin-top:35px;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+gap:18px;
+
+}
+
+.actionButtons button{
+
+padding:15px;
+
+border:none;
+
+border-radius:12px;
+
+background:#ff6a00;
+
+color:#fff;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+.actionButtons button:hover{
+
+background:#ff8533;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="profileContainer">
+
+<div class="profileTop">
+
+<div class="profileImage">
+
+👤
+
+</div>
+
+<div class="profileInfo">
+
+<h1 id="userName">Loading...</h1>
+
+<p id="userEmail">Loading...</p>
+
+</div>
+
+</div>
+
+<div class="profileGrid">
+
+<div class="profileCard">
+
+<h3>Orders</h3>
+
+<p>0</p>
+
+</div>
+
+<div class="profileCard">
+
+<h3>Wishlist</h3>
+
+<p>0</p>
+
+</div>
+
+<div class="profileCard">
+
+<h3>Cart Items</h3>
+
+<p>0</p>
+
+</div>
+
+<div class="profileCard">
+
+<h3>Member</h3>
+
+<p>Premium</p>
+
+</div>
+
+</div>
+
+<div class="actionButtons">
+
+<button onclick="location.href='orders.html'">
+
+My Orders
+
+</button>
+
+<button onclick="location.href='wishlist.html'">
+
+Wishlist
+
+</button>
+
+<button onclick="location.href='cart.html'">
+
+Cart
+
+</button>
+
+<button id="logoutBtn">
+
+Logout
+
+</button>
+
+</div>
