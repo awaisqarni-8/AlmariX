@@ -132,3 +132,48 @@ alert(product + " added to Wishlist ❤️");
 });
 
 });
+// =========================
+// Product Click
+// =========================
+
+document.querySelectorAll(".productCard img").forEach((img)=>{
+
+img.addEventListener("click",()=>{
+
+alert("Product Details page coming soon.");
+
+});
+
+});
+
+// =========================
+// Navbar Shadow
+// =========================
+
+window.addEventListener("scroll",()=>{
+
+const nav = document.querySelector(".navbar");
+
+if(!nav) return;
+
+if(window.scrollY>50){
+
+nav.style.boxShadow="0 8px 25px rgba(0,0,0,.25)";
+
+}else{
+
+nav.style.boxShadow="0 5px 20px rgba(0,0,0,.15)";
+
+}
+
+});
+
+// =========================
+// Welcome
+// =========================
+
+window.addEventListener("load",()=>{
+
+console.log("ShopHub Loaded Successfully");
+
+});
