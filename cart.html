@@ -247,3 +247,44 @@ Checkout
 </button>
 
 </div>
+</div>
+
+<script type="module">
+
+import { auth } from "./firebase.js";
+
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+onAuthStateChanged(auth,(user)=>{
+
+if(!user){
+
+window.location.href="login.html";
+
+}
+
+});
+
+document.querySelector(".checkoutBtn").addEventListener("click",()=>{
+
+alert("Checkout feature will be connected after payment gateway setup.");
+
+});
+
+document.querySelectorAll(".removeBtn").forEach((btn)=>{
+
+btn.addEventListener("click",()=>{
+
+btn.closest(".cartItem").remove();
+
+document.getElementById("totalPrice").innerText="$0.00";
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>
