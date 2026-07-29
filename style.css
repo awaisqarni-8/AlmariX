@@ -224,3 +224,118 @@ transition:.3s;
 .productCard button:hover{
 
 background:#ff853
+.footer{
+
+background:#111827;
+
+color:white;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:30px;
+
+padding:50px 40px;
+
+margin-top:40px;
+
+}
+
+.footerSection h3{
+
+margin-bottom:15px;
+
+font-size:22px;
+
+}
+
+.footerSection p,
+.footerSection a{
+
+color:#ddd;
+
+line-height:30px;
+
+font-size:15px;
+
+}
+
+.footerSection a:hover{
+
+color:#ff6a00;
+
+}
+
+@media(max-width:768px){
+
+.navbar{
+
+flex-direction:column;
+
+height:auto;
+
+padding:15px;
+
+gap:15px;
+
+}
+
+.searchBox{
+
+width:100%;
+
+}
+
+.navIcons{
+
+font-size:24px;
+
+}
+
+.categoryBar{
+
+flex-wrap:wrap;
+
+gap:15px;
+
+}
+
+.heroBanner{
+
+height:auto;
+
+padding:40px 20px;
+
+text-align:center;
+
+justify-content:center;
+
+}
+
+.bannerText h1{
+
+font-size:38px;
+
+}
+
+.bannerText p{
+
+font-size:18px;
+
+}
+
+.flashSale,
+.featuredProducts{
+
+padding:30px 20px;
+
+}
+
+.footer{
+
+padding:35px 20px;
+
+}
+
+}
