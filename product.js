@@ -21,3 +21,26 @@ const snapshot = await getDocs(collection(db,"products"));
 snapshot.forEach((doc)=>{
 
 const product = doc.data();
+const card = document.createElement("div");
+
+card.className = "productCard";
+
+card.innerHTML = `
+
+<img src="${product.image}" alt="${product.name}">
+
+<h3>${product.name}</h3>
+
+<p>$${product.price}</p>
+
+<button>Add to Cart</button>
+
+`;
+
+productGrid.appendChild(card);
+
+});
+
+}
+
+loadProducts();
