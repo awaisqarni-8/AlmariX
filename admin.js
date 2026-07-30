@@ -47,3 +47,48 @@ console.log(error);
 }
 
 });
+const productList = document.getElementById("productList");
+
+async function loadAdminProducts() {
+
+  productList.innerHTML = "";
+
+  const snapshot = await getDocs(collection(db, "products"));
+
+  snapshot.forEach((item) => {
+
+    const product = item.data();
+
+    productList.innerHTML += `
+      <div class="productCard">
+
+        <img src="${product.image}" alt="${product.name}" width="120">
+
+        <h3>${product.name}</h3>
+
+        <p>PKR ${product.price}</p>
+
+        <button onclick="deleteProduct('${item.id}')">
+          Delete
+        </button>
+
+      </div>
+    `;
+
+  });
+
+}
+
+window.deleteProduct = async (id) => {
+
+  if(confirm("Delete this product?")){
+
+    await deleteDoc(doc(db, "products", id));
+
+    loadAdminProducts();
+
+  }
+
+};
+
+loadAdminProducts();
