@@ -426,3 +426,15 @@ cursor:pointer;
 #productForm button:hover{
 background:#e65c00;
 }
+.inputBox select{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+}
+
+.inputBox input[type="file"]{
+width:100%;
+padding:10px;
+}
