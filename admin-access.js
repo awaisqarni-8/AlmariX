@@ -24,3 +24,24 @@ adminBtn.style.display = "none";
 }
 
 });
+const currentPage =
+window.location.pathname.split("/").pop();
+
+if(currentPage === "admin.html"){
+
+onAuthStateChanged(auth,(user)=>{
+
+if(
+!user ||
+user.email !== "almarixofficial@gmail.com"
+){
+
+alert("Access Denied!");
+
+window.location.href = "index.html";
+
+}
+
+});
+
+}
