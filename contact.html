@@ -194,3 +194,49 @@ Send Message
 <p>🕒 Support: Monday - Sunday (24/7)</p>
 
 </div>
+<script>
+
+document.getElementById("contactForm").addEventListener("submit", async (e)=>{
+
+e.preventDefault();
+
+const name=document.getElementById("name").value;
+const email=document.getElementById("email").value;
+const message=document.getElementById("message").value;
+
+try{
+
+await fetch("https://formsubmit.co/ajax/almarixofficial@gmail.com",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json",
+"Accept":"application/json"
+},
+
+body:JSON.stringify({
+name:name,
+email:email,
+message:message
+})
+
+});
+
+alert("✅ Your message has been sent successfully.");
+
+document.getElementById("contactForm").reset();
+
+}catch(error){
+
+alert("❌ Failed to send message. Please try again.");
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
