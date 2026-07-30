@@ -19,8 +19,17 @@ import { db, storage } from "./firebase.js";
 import {
 collection,
 addDoc,
+getDocs,
+deleteDoc,
+updateDoc,
+doc
 serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+import {
+ref,
+uploadBytes,
+getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-storage.js";
 
 const form = document.getElementById("productForm");
 
