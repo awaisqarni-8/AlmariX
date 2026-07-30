@@ -1,45 +1,41 @@
 import { db } from "./firebase.js";
 
 import {
-
 collection,
-
 getDocs
-
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
-const productGrid = document.querySelector(".productGrid");
+const productGrid = document.querySelector(".featuredProducts .productGrid");
 
-async function loadProducts(){
+async function loadProducts() {
 
-if(!productGrid) return;
+  productGrid.innerHTML = "";
 
-productGrid.innerHTML = "";
+  const snapshot = await getDocs(collection(db, "products"));
 
-const snapshot = await getDocs(collection(db,"products"));
+  snapshot.forEach((doc) => {
 
-snapshot.forEach((doc)=>{
+    const product = doc.data();
 
-const product = doc.data();
-const card = document.createElement("div");
+    productGrid.innerHTML += `
+      <div class="productCard">
 
-card.className = "productCard";
+        <img src="${product.image}" alt="${product.name}">
 
-card.innerHTML = `
+        <h3>${product.name}</h3>
 
-<img src="${product.image}" alt="${product.name}">
+        <p>PKR ${product.price}</p>
 
-<h3>${product.name}</h3>
+        <small>${product.description}</small><br><br>
 
-<p>$${product.price}</p>
+        <button onclick="addToCart('${doc.id}')">
+          Add to Cart
+        </button>
 
-<button>Add to Cart</button>
+      </div>
+    `;
 
-`;
-
-productGrid.appendChild(card);
-
-});
+  });
 
 }
 
