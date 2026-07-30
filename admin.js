@@ -1,68 +1,49 @@
 import { db } from "./firebase.js";
 
 import {
-
 collection,
-
 addDoc,
-
 serverTimestamp
-
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
-const productForm = document.getElementById("productForm");
+const form = document.getElementById("productForm");
 
-if(productForm){
-
-productForm.addEventListener("submit", async(e)=>{
+form.addEventListener("submit", async (e) => {
 
 e.preventDefault();
 
-const name =
-document.getElementById("productName").value.trim();
+const product = {
 
-const price =
-document.getElementById("productPrice").value.trim();
+name: document.getElementById("productName").value,
 
-const image =
-document.getElementById("productImage").value.trim();
+price: Number(document.getElementById("productPrice").value),
 
-const category =
-document.getElementById("productCategory").value.trim();
+description: document.getElementById("productDescription").value,
 
-if(!name || !price || !image || !category){
+image: document.getElementById("productImage").value,
 
-alert("Please fill all fields.");
+category: document.getElementById("productCategory").value,
 
-return;
+stock: Number(document.getElementById("productStock").value),
 
-}
+createdAt: serverTimestamp()
+
+};
+
 try{
 
-await addDoc(collection(db,"products"),{
+await addDoc(collection(db,"products"), product);
 
-name:name,
+alert("✅ Product Added Successfully");
 
-price:price,
-
-image:image,
-
-category:category,
-
-createdAt:serverTimestamp()
-
-});
-
-alert("✅ Product Added Successfully!");
-
-productForm.reset();
+form.reset();
 
 }catch(error){
 
 alert(error.message);
 
+console.log(error);
+
 }
 
 });
-
-}
