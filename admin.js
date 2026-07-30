@@ -68,9 +68,13 @@ async function loadAdminProducts() {
 
         <p>PKR ${product.price}</p>
 
-        <button onclick="deleteProduct('${item.id}')">
-          Delete
-        </button>
+        <button onclick="editProduct('${item.id}')">
+Edit
+</button>
+
+<button onclick="deleteProduct('${item.id}')">
+Delete
+</button>
 
       </div>
     `;
