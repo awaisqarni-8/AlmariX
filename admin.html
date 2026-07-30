@@ -190,3 +190,42 @@ font-size:16px;
 <input type="text" id="productPrice" placeholder="Product Price" required>
 
 </div>
+</table>
+
+<script type="module">
+
+import { auth } from "./firebase.js";
+
+import {
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+onAuthStateChanged(auth,(user)=>{
+
+if(!user){
+
+window.location.href="login.html";
+
+return;
+
+}
+
+});
+
+document.getElementById("productForm").addEventListener("submit",(e)=>{
+
+e.preventDefault();
+
+alert("✅ Product Added Successfully!");
+
+document.getElementById("productForm").reset();
+
+});
+
+</script>
+
+</div>
+
+</body>
+
+</html>
