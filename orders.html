@@ -222,3 +222,36 @@ cursor:pointer;
 </div>
 
 </div>
+</div>
+
+<script type="module">
+
+import { auth } from "./firebase.js";
+
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+onAuthStateChanged(auth,(user)=>{
+
+if(!user){
+
+window.location.href="login.html";
+
+}
+
+});
+
+document.querySelectorAll(".orderBtn").forEach((btn)=>{
+
+btn.addEventListener("click",()=>{
+
+alert("Order details feature will be available soon.");
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>
