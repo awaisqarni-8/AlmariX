@@ -37,3 +37,32 @@ alert("Please fill all fields.");
 return;
 
 }
+try{
+
+await addDoc(collection(db,"products"),{
+
+name:name,
+
+price:price,
+
+image:image,
+
+category:category,
+
+createdAt:serverTimestamp()
+
+});
+
+alert("✅ Product Added Successfully!");
+
+productForm.reset();
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+});
+
+}
