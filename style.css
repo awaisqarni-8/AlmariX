@@ -396,3 +396,33 @@ transition:.3s;
 .navBtn:hover{
 background:#1d4ed8;
 }
+#productForm{
+max-width:600px;
+margin:30px auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+#productForm input,
+#productForm textarea{
+padding:14px;
+font-size:16px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+#productForm button{
+padding:15px;
+background:#ff6a00;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:17px;
+font-weight:600;
+cursor:pointer;
+}
+
+#productForm button:hover{
+background:#e65c00;
+}
