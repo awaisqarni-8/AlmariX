@@ -173,9 +173,31 @@ font-size:16px;
 
 </div>
 
-<div class="inputBox">
+<div class="formBox">
 
-<input type="text" id="productPrice" placeholder="Product Price" required>
+<h2>Add New Product</h2>
+
+<form id="productForm">
+
+<div class="inputBox">
+<input type="text" id="productName" placeholder="Product Name" required>
+</div>
+
+<div class="inputBox">
+<input type="number" id="productPrice" placeholder="Price (PKR)" required>
+</div>
+
+<div class="inputBox">
+<textarea id="productDescription" placeholder="Product Description" rows="4" required></textarea>
+</div>
+
+<div class="inputBox">
+<input type="text" id="productImage" placeholder="Image URL (images/product1.png)" required>
+</div>
+
+<button type="submit" class="loginBtn">Add Product</button>
+
+</form>
 
 </div>
 </table>
