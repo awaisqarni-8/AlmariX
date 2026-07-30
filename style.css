@@ -339,3 +339,15 @@ padding:35px 20px;
 }
 
 }
+.footer{
+background:#111827;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:40px;
+}
+
+.footer p{
+margin:8px 0;
+font-size:15px;
+}
