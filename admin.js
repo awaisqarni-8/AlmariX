@@ -1,4 +1,4 @@
-
+console.log("Admin JS Loaded");
 import { db, storage } from "./firebase.js";
 
 import {
