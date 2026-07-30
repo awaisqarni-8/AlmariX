@@ -15,6 +15,7 @@ preview.style.display = "block";
 
 });
 
+import { db, storage } from "./firebase.js";
 import {
 collection,
 addDoc,
