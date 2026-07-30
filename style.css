@@ -351,3 +351,17 @@ margin-top:40px;
 margin:8px 0;
 font-size:15px;
 }
+.navBtn{
+background:#2563eb;
+color:#fff;
+padding:10px 18px;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+margin-right:10px;
+transition:.3s;
+}
+
+.navBtn:hover{
+background:#1d4ed8;
+}
