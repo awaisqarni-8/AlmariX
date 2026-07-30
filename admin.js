@@ -100,6 +100,28 @@ window.editProduct = async (id) => {
 
 const newName = prompt("Enter New Product Name");
 
+if (!newName) return;
+
+try {
+
+await updateDoc(doc(db, "products", id), {
+name: newName
+});
+
+alert("✅ Product Updated Successfully");
+
+loadAdminProducts();
+
+} catch (error) {
+
+alert(error.message);
+
+}
+
+};
+
+const newName = prompt("Enter New Product Name");
+
 if(!newName) return;
 
 alert("Edit feature selected for Product ID: " + id);
