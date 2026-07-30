@@ -96,3 +96,14 @@ window.deleteProduct = async (id) => {
 };
 
 loadAdminProducts();
+window.editProduct = async (id) => {
+
+const newName = prompt("Enter New Product Name");
+
+if(!newName) return;
+
+alert("Edit feature selected for Product ID: " + id);
+
+/* Next part me Firestore updateDoc() add karenge */
+
+};
