@@ -64,11 +64,8 @@ alert("✅ Product Added Successfully");
 form.reset();
 
 }catch(error){
-
-alert(error.message);
-
-console.log(error);
-
+console.error(error);
+alert(error.code + "\n" + error.message);
 }
 
 });
