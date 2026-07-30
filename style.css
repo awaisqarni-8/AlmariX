@@ -61,9 +61,24 @@ font-size:22px;
 
 .navIcons{
 display:flex;
-gap:25px;
-font-size:28px;
+align-items:center;
+gap:12px;
 color:#fff;
+}
+
+.navBtn{
+display:inline-block;
+background:#2563eb;
+color:#fff;
+padding:10px 18px;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+font-size:16px;
+}
+
+.navBtn:hover{
+background:#1d4ed8;
 }
 
 .categoryBar{
@@ -222,8 +237,8 @@ transition:.3s;
 }
 
 .productCard button:hover{
-
-background:#ff853
+background:#ff8533;
+}
 .footer{
 
 background:#111827;
