@@ -36,7 +36,11 @@ createdAt: serverTimestamp()
 
 };
 
-await addDoc(collection(db,"products"), product);
+const docRef = await addDoc(collection(db, "products"), product);
+
+console.log("Saved:", docRef.id);
+
+alert("Product Saved");
 
 alert("✅ Product Added Successfully");
 
