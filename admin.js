@@ -1,4 +1,3 @@
-console.log("Admin JS Loaded");
 import { db, storage } from "./firebase.js";
 
 import {
@@ -16,6 +15,7 @@ ref,
 uploadBytes,
 getDownloadURL
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-storage.js";
+console.log("Admin JS Loaded");
 
 const form = document.getElementById("productForm");
 const productList = document.getElementById("productList");
