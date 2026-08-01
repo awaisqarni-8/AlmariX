@@ -45,11 +45,11 @@ container.innerHTML = `
 
 <br>
 
-<button class="cartBtn">
+<button class="cartBtn" onclick="addToCart()">
 Add to Cart
 </button>
 
-<button class="buyBtn">
+<button class="buyBtn" onclick="buyNow()">
 Buy Now
 </button>
 
