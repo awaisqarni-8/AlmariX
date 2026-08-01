@@ -22,8 +22,8 @@ snapshot.forEach((item) => {
 const product = item.data();
 
 productGrid.innerHTML += `
-
-<div class="productCard">
+<div class="productCard"
+onclick="window.location.href='product.html?id=${item.id}'">
 
 <img src="${product.image}" alt="${product.name}">
 
@@ -31,12 +31,7 @@ productGrid.innerHTML += `
 
 <p>PKR ${product.price}</p>
 
-<p>${product.description}</p>
-
-<button>Add to Cart</button>
-
 </div>
-
 `;
 
 });
