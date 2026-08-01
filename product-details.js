@@ -5,6 +5,8 @@ doc,
 getDoc
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
+let product = {};
+
 const params = new URLSearchParams(window.location.search);
 
 const id = params.get("id");
@@ -23,7 +25,7 @@ return;
 
 }
 
-const product = snap.data();
+product = snap.data();
 
 container.innerHTML = `
 
@@ -60,5 +62,31 @@ Buy Now
 `;
 
 }
+
+window.addToCart = () => {
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+cart.push({
+id: id,
+name: product.name,
+price: product.price,
+image: product.image,
+qty: 1
+});
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+alert("✅ Product Added To Cart");
+
+};
+
+window.buyNow = () => {
+
+localStorage.setItem("buyNowProduct", JSON.stringify(product));
+
+window.location.href = "checkout.html";
+
+};
 
 loadProduct();
