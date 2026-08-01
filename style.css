@@ -473,3 +473,49 @@ border:none;
 border-radius:6px;
 cursor:pointer;
 }
+.productGrid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.productCard{
+background:#fff;
+border-radius:12px;
+padding:12px;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+text-align:center;
+cursor:pointer;
+transition:.3s;
+}
+
+.productCard:hover{
+transform:translateY(-5px);
+}
+
+.productCard img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.productCard h3{
+font-size:18px;
+margin:10px 0 5px;
+}
+
+.productCard p{
+font-size:16px;
+font-weight:bold;
+color:#ff6a00;
+}
+
+.productCard small{
+display:none;
+}
+
+.productCard button{
+display:none;
+}
