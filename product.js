@@ -9,34 +9,39 @@ const productGrid = document.querySelector(".featuredProducts .productGrid");
 
 async function loadProducts() {
 
-  productGrid.innerHTML = "";
+if (!productGrid) {
+console.log("Product Grid Not Found");
+return;
+}
 
-  const snapshot = await getDocs(collection(db, "products"));
+productGrid.innerHTML = "";
 
-  snapshot.forEach((doc) => {
+const snapshot = await getDocs(collection(db, "products"));
+snapshot.forEach((item) => {
 
-    const product = doc.data();
+const product = item.data();
 
-    productGrid.innerHTML += `
-      <div class="productCard">
+productGrid.innerHTML += `
 
-        <img src="${product.image}" alt="${product.name}">
+<div class="productCard">
 
-        <h3>${product.name}</h3>
+<img src="${product.image}" alt="${product.name}">
 
-        <p>PKR ${product.price}</p>
+<h3>${product.name}</h3>
 
-        <small>${product.description}</small><br><br>
+<p>PKR ${product.price}</p>
 
-        <button onclick="addToCart('${doc.id}')">
-          Add to Cart
-        </button>
+<p>${product.description}</p>
 
-      </div>
-    `;
+<button>Add to Cart</button>
 
-  });
+</div>
+
+`;
+
+});
 
 }
 
 loadProducts();
+        
