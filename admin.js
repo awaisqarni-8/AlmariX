@@ -1,123 +1,157 @@
-import { db } from "./firebase.js";
-
 import {
-collection,
-addDoc,
-getDocs,
-deleteDoc,
-updateDoc,
-doc,
-serverTimestamp
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  updateDoc,
+  doc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 const form = document.getElementById("productForm");
 const productList = document.getElementById("productList");
+
+let editId = null;
+
 form.addEventListener("submit", async (e) => {
 
-e.preventDefault();
+  e.preventDefault();
 
-try{
+  try {
 
-const product = {
+    const product = {
 
-name: document.getElementById("productName").value.trim(),
+      name: document.getElementById("productName").value.trim(),
 
-price: Number(document.getElementById("productPrice").value),
+      price: Number(document.getElementById("productPrice").value),
 
-category: document.getElementById("productCategory").value,
+      category: document.getElementById("productCategory").value,
 
-stock: Number(document.getElementById("productStock").value),
+      stock: Number(document.getElementById("productStock").value),
 
-description: document.getElementById("productDescription").value.trim(),
+      description: document.getElementById("productDescription").value.trim(),
 
-image: document.getElementById("productImage").value.trim(),
+      image: document.getElementById("productImage").value.trim(),
 
-createdAt: serverTimestamp()
+      image2: document.getElementById("productImage2").value.trim(),
+
+      createdAt: serverTimestamp()
+
+    };
+
+    if (editId) {
+
+      await updateDoc(doc(db, "products", editId), product);
+
+      alert("✅ Product Updated Successfully");
+
+      editId = null;
+
+      form.querySelector("button").innerText = "Add Product";
+
+    } else {
+
+      await addDoc(collection(db, "products"), product);
+
+      alert("✅ Product Added Successfully");
+
+    }
+
+    form.reset();
+
+    loadProducts();
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(error.message);
+
+  }
+
+});
+
+async function loadProducts() {
+
+  productList.innerHTML = "";
+
+  const snapshot = await getDocs(collection(db, "products"));
+
+  snapshot.forEach((item) => {
+
+    const product = item.data();
+
+    productList.innerHTML += `
+
+    <div class="productCard">
+
+      <img src="${product.image}" width="150">
+
+      ${product.image2 ? `<img src="${product.image2}" width="150">` : ""}
+
+      <h3>${product.name}</h3>
+
+      <p><b>PKR ${product.price}</b></p>
+
+      <p>${product.category}</p>
+
+      <p>Stock: ${product.stock}</p>
+
+      <p>${product.description}</p>
+
+      <button onclick="editProduct('${item.id}')">✏ Edit</button>
+
+      <button onclick="deleteProduct('${item.id}')">🗑 Delete</button>
+
+    </div>
+
+    `;
+
+  });
+
+}
+
+window.deleteProduct = async (id) => {
+
+  if (!confirm("Delete this product?")) return;
+
+  await deleteDoc(doc(db, "products", id));
+
+  loadProducts();
 
 };
 
-const docRef = await addDoc(collection(db, "products"), product);
+window.editProduct = async (id) => {
 
-console.log("Saved:", docRef.id);
+  const snapshot = await getDocs(collection(db, "products"));
 
-alert("Product Saved");
+  snapshot.forEach((item) => {
 
-alert("✅ Product Added Successfully");
+    if (item.id === id) {
 
-form.reset();
+      const product = item.data();
 
-loadProducts();
+      document.getElementById("productName").value = product.name;
 
-}catch(error){
+      document.getElementById("productPrice").value = product.price;
 
-console.error(error);
+      document.getElementById("productCategory").value = product.category;
 
-alert(error.message);
+      document.getElementById("productStock").value = product.stock;
 
-}
+      document.getElementById("productDescription").value = product.description;
 
-});
-async function loadProducts(){
+      document.getElementById("productImage").value = product.image;
 
-productList.innerHTML = "";
+      document.getElementById("productImage2").value = product.image2 || "";
 
-const snapshot = await getDocs(collection(db,"products"));
+      editId = id;
 
-snapshot.forEach((item)=>{
+      form.querySelector("button").innerText = "Update Product";
 
-const product = item.data();
+    }
 
-productList.innerHTML += `
-
-<div class="productCard">
-
-<img src="${product.image}" width="150">
-
-<h3>${product.name}</h3>
-
-<p><b>PKR ${product.price}</b></p>
-
-<p>${product.category}</p>
-
-<p>Stock: ${product.stock}</p>
-
-<p>${product.description}</p>
-
-<button onclick="deleteProduct('${item.id}')">Delete</button>
-
-<button onclick="editProduct('${item.id}')">Edit</button>
-
-</div>
-
-`;
-
-});
-
-}
-
-window.deleteProduct = async(id)=>{
-
-if(confirm("Delete this product?")){
-
-await deleteDoc(doc(db,"products",id));
-
-loadProducts();
-
-}
-
-};
-
-window.editProduct = async(id)=>{
-
-const newName = prompt("Enter New Product Name");
-
-if(!newName) return;
-
-await updateDoc(doc(db,"products",id),{
-name:newName
-});
-
-loadProducts();
+  });
 
 };
 
