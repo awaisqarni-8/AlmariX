@@ -35,7 +35,13 @@ productGrid.innerHTML += `
 <div class="productCard"
 onclick="window.location.href='product.html?id=${item.id}'">
 
+<div class="productImages">
+
 <img src="${product.image}" alt="${product.name}">
+
+${product.image2 ? `<img src="${product.image2}" alt="${product.name}">` : ""}
+
+</div>
 
 <h3>${product.name}</h3>
 
