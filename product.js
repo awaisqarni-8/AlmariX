@@ -53,6 +53,11 @@ document.querySelectorAll(".categoryBar a").forEach((link)=>{
 link.addEventListener("click",(e)=>{
 
 e.preventDefault();
+document.querySelectorAll(".categoryBar a").forEach(a=>{
+a.classList.remove("active");
+});
+
+link.classList.add("active");
 
 currentCategory = link.dataset.category;
 
