@@ -7,6 +7,8 @@ getDocs
 
 const productGrid = document.querySelector(".featuredProducts .productGrid");
 
+let currentCategory = "All";
+
 async function loadProducts() {
 
 if (!productGrid) {
@@ -17,9 +19,17 @@ return;
 productGrid.innerHTML = "";
 
 const snapshot = await getDocs(collection(db, "products"));
+
 snapshot.forEach((item) => {
 
 const product = item.data();
+
+if (
+currentCategory !== "All" &&
+product.category !== currentCategory
+){
+return;
+}
 
 productGrid.innerHTML += `
 <div class="productCard"
@@ -38,5 +48,18 @@ onclick="window.location.href='product.html?id=${item.id}'">
 
 }
 
+document.querySelectorAll(".categoryBar a").forEach((link)=>{
+
+link.addEventListener("click",(e)=>{
+
+e.preventDefault();
+
+currentCategory = link.dataset.category;
+
 loadProducts();
-        
+
+});
+
+});
+
+loadProducts();
