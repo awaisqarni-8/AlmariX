@@ -31,7 +31,8 @@ container.innerHTML = `
 
 <div class="productDetails">
 
-<img src="${product.image}" alt="${product.name}">
+<img src="${product.images[0]}" alt="${product.name}">
+<img src="${product.images[1]}" alt="${product.name}">
 
 <div class="info">
 
