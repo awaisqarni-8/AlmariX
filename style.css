@@ -519,3 +519,21 @@ display:none;
 .productCard button{
 display:none;
 }
+.categoryBar a{
+padding:10px 16px;
+text-decoration:none;
+color:#333;
+border-radius:8px;
+transition:.3s;
+}
+
+.categoryBar a:hover{
+background:#ff6a00;
+color:#fff;
+}
+
+.categoryBar a.active{
+background:#ff6a00;
+color:#fff;
+font-weight:600;
+}
