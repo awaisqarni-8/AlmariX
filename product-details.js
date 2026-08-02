@@ -29,10 +29,21 @@ product = snap.data();
 
 container.innerHTML = `
 
-<div class="productDetails">
+<div class="productImages">
 
-<img src="${product.images[0]}" alt="${product.name}">
-<img src="${product.images[1]}" alt="${product.name}">
+<img id="mainImage" src="${product.image}" alt="${product.name}" class="mainImage">
+
+<div class="thumbs">
+
+<img src="${product.image}"
+onclick="document.getElementById('mainImage').src='${product.image}'">
+
+${product.image2 ? `
+<img src="${product.image2}"
+onclick="document.getElementById('mainImage').src='${product.image2}'">
+` : ""}
+
+</div>
 
 <div class="info">
 
