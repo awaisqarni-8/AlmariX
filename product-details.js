@@ -45,6 +45,8 @@ onclick="document.getElementById('mainImage').src='${product.image2}'">
 
 </div>
 
+</div>
+
 <div class="info">
 
 <h1>${product.name}</h1>
