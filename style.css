@@ -516,8 +516,28 @@ color:#ff6a00;
 display:none;
 }
 
-.productCard button{
+.featuredProducts .productCard button,
+.flashSale .productCard button{
 display:none;
+}
+
+#productList .productCard button{
+display:inline-block !important;
+margin:8px 5px 0;
+padding:10px 15px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+#productList .productCard button:first-of-type{
+background:#2563eb;
+color:#fff;
+}
+
+#productList .productCard button:last-of-type{
+background:#dc2626;
+color:#fff;
 }
 .categoryBar a{
 padding:10px 16px;
