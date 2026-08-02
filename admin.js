@@ -100,9 +100,17 @@ async function loadProducts() {
 
       <p>${product.description}</p>
 
-      <button onclick="editProduct('${item.id}')">✏ Edit</button>
+      <div style="margin-top:15px;">
+  <button style="background:#0d6efd;color:white;padding:10px 15px;border:none;border-radius:8px;cursor:pointer;"
+  onclick="editProduct('${item.id}')">
+  Edit
+  </button>
 
-      <button onclick="deleteProduct('${item.id}')">🗑 Delete</button>
+  <button style="background:red;color:white;padding:10px 15px;border:none;border-radius:8px;cursor:pointer;margin-left:10px;"
+  onclick="deleteProduct('${item.id}')">
+  Delete
+  </button>
+</div>
 
     </div>
 
