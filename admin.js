@@ -32,6 +32,10 @@ form.addEventListener("submit", async (e) => {
 
       description: document.getElementById("productDescription").value.trim(),
 
+document.getElementById("productSize").value = product.size || "";
+
+document.getElementById("productColor").value = product.color || "";
+
       image: document.getElementById("productImage").value.trim(),
 
       image2: document.getElementById("productImage2").value.trim(),
