@@ -148,6 +148,10 @@ window.editProduct = async (id) => {
 
       document.getElementById("productStock").value = product.stock;
 
+document.getElementById("productSize").value = product.size || "";
+
+document.getElementById("productColor").value = product.color || "";
+
       document.getElementById("productDescription").value = product.description;
 
       document.getElementById("productImage").value = product.image;
