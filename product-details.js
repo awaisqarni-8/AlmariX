@@ -59,6 +59,34 @@ onclick="document.getElementById('mainImage').src='${product.image2}'">
 
 <p><b>Stock:</b> ${product.stock}</p>
 
+<div style="margin-top:15px;">
+
+<label><b>Size:</b></label><br>
+
+<select id="selectedSize">
+
+<option value="">Select Size</option>
+
+${product.size ? `<option value="${product.size}">${product.size}</option>` : ""}
+
+</select>
+
+</div>
+
+<div style="margin-top:15px;">
+
+<label><b>Color:</b></label><br>
+
+<select id="selectedColor">
+
+<option value="">Select Color</option>
+
+${product.color ? `<option value="${product.color}">${product.color}</option>` : ""}
+
+</select>
+
+</div>
+
 <br>
 
 <button class="cartBtn" onclick="addToCart()">
