@@ -125,7 +125,11 @@ alert("✅ Product Added To Cart");
 
 window.buyNow = () => {
 
-localStorage.setItem("buyNowProduct", JSON.stringify(product));
+localStorage.setItem("buyNowProduct", JSON.stringify({
+  ...product,
+  selectedSize: document.getElementById("selectedSize").value,
+  selectedColor: document.getElementById("selectedColor").value
+}));
 
 window.location.href = "checkout.html";
 
