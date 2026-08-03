@@ -129,3 +129,92 @@ Place Order
 </form>
 
 </div>
+<script type="module">
+
+import { db } from "./firebase.js";
+
+import {
+collection,
+addDoc,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+emailjs.init("NNKJbKfZw26KK07k6");
+
+// Load selected product size & color
+const buyNowProduct = JSON.parse(localStorage.getItem("buyNowProduct"));
+
+if (buyNowProduct) {
+document.getElementById("selectedSize").value =
+buyNowProduct.selectedSize || "";
+
+document.getElementById("selectedColor").value =
+buyNowProduct.selectedColor || "";
+}
+
+document.getElementById("checkoutForm").addEventListener("submit", async(e)=>{
+
+e.preventDefault();
+
+try{
+
+const order = {
+
+name:document.getElementById("fullName").value,
+phone:document.getElementById("phone").value,
+email:document.getElementById("email").value,
+city:document.getElementById("city").value,
+province:document.getElementById("province").value,
+zip:document.getElementById("zip").value,
+address:document.getElementById("address").value,
+
+payment:"Cash on Delivery (COD)",
+
+size:document.getElementById("selectedSize").value,
+
+color:document.getElementById("selectedColor").value,
+
+status:"Pending",
+
+createdAt:serverTimestamp()
+
+};
+
+await addDoc(collection(db,"orders"),order);
+
+await emailjs.send(
+"service_c6sr14f",
+"template_lbk16wb",
+{
+customer_name:order.name,
+phone:order.phone,
+email:order.email,
+city:order.city,
+province:order.province,
+address:order.address,
+payment:order.payment,
+size:order.size,
+color:order.color
+}
+);
+
+localStorage.removeItem("buyNowProduct");
+
+alert("✅ Order Placed Successfully!");
+
+window.location.href="index.html";
+
+}catch(error){
+
+console.error(error);
+
+alert(error.message);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
