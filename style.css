@@ -594,3 +594,41 @@ transition:.3s;
 border:2px solid #22c55e;
 transform:scale(1.05);
 }
+@media (max-width:768px){
+
+.productGrid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.productCard{
+padding:8px;
+border-radius:10px;
+}
+
+.productCard img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:8px;
+}
+
+.productCard h3{
+font-size:13px;
+margin:6px 0;
+line-height:1.3;
+}
+
+.productCard p{
+font-size:12px;
+margin:3px 0;
+}
+
+.cartBtn,
+.buyBtn{
+font-size:12px;
+padding:8px;
+}
+
+}
