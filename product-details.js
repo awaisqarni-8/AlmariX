@@ -67,7 +67,11 @@ onclick="document.getElementById('mainImage').src='${product.image2}'">
 
 <option value="">Select Size</option>
 
-${product.size ? `<option value="${product.size}">${product.size}</option>` : ""}
+${product.size1 ? `<option value="${product.size1}">${product.size1}</option>` : ""}
+
+${product.size2 ? `<option value="${product.size2}">${product.size2}</option>` : ""}
+
+${product.size3 ? `<option value="${product.size3}">${product.size3}</option>` : ""}
 
 </select>
 
@@ -81,7 +85,9 @@ ${product.size ? `<option value="${product.size}">${product.size}</option>` : ""
 
 <option value="">Select Color</option>
 
-${product.color ? `<option value="${product.color}">${product.color}</option>` : ""}
+${product.color1 ? `<option value="${product.color1}">${product.color1}</option>` : ""}
+
+${product.color2 ? `<option value="${product.color2}">${product.color2}</option>` : ""}
 
 </select>
 
