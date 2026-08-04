@@ -155,9 +155,15 @@ window.editProduct = async (id) => {
 
       document.getElementById("productStock").value = product.stock;
 
-      document.getElementById("productSize").value = product.size || "";
+      size1: document.getElementById("productSize1").value.trim(),
 
-      document.getElementById("productColor").value = product.color || "";
+size2: document.getElementById("productSize2").value.trim(),
+
+size3: document.getElementById("productSize3").value.trim(),
+
+color1: document.getElementById("productColor1").value.trim(),
+
+color2: document.getElementById("productColor2").value.trim(),
 
       document.getElementById("productDescription").value = product.description;
 
