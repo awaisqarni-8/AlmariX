@@ -150,13 +150,16 @@ margin-bottom:30px;
 }
 
 .productGrid{
-
 display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
 
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-
-gap:25px;
-
+@media(max-width:768px){
+.productGrid{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
 }
 
 .productCard{
