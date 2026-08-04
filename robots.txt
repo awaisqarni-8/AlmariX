@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://almarixcom.vercel.app/sitemap.xml
