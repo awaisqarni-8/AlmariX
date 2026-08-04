@@ -107,3 +107,72 @@ async function loadProducts() {
       <p>${product.description}</p>
 
       <div style="margin-top:15px;">
+      <button
+      style="background:#0d6efd;color:white;padding:10px 15px;border:none;border-radius:8px;cursor:pointer;"
+      onclick="editProduct('${item.id}')">
+      ✏ Edit
+      </button>
+
+      <button
+      style="background:red;color:white;padding:10px 15px;border:none;border-radius:8px;cursor:pointer;margin-left:10px;"
+      onclick="deleteProduct('${item.id}')">
+      🗑 Delete
+      </button>
+
+      </div>
+
+    </div>
+    `;
+  });
+
+}
+
+window.deleteProduct = async (id) => {
+
+  if (!confirm("Delete this product?")) return;
+
+  await deleteDoc(doc(db, "products", id));
+
+  loadProducts();
+
+};
+
+window.editProduct = async (id) => {
+
+  const snapshot = await getDocs(collection(db, "products"));
+
+  snapshot.forEach((item) => {
+
+    if (item.id === id) {
+
+      const product = item.data();
+
+      document.getElementById("productName").value = product.name;
+
+      document.getElementById("productPrice").value = product.price;
+
+      document.getElementById("productCategory").value = product.category;
+
+      document.getElementById("productStock").value = product.stock;
+
+      document.getElementById("productSize").value = product.size || "";
+
+      document.getElementById("productColor").value = product.color || "";
+
+      document.getElementById("productDescription").value = product.description;
+
+      document.getElementById("productImage").value = product.image;
+
+      document.getElementById("productImage2").value = product.image2 || "";
+
+      editId = id;
+
+      form.querySelector("button").innerText = "Update Product";
+
+    }
+
+  });
+
+};
+
+loadProducts();
