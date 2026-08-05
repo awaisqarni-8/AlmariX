@@ -53,7 +53,7 @@ onclick="document.getElementById('mainImage').src='${product.image2}'">
 
 <h2>PKR ${product.price}</h2>
 
-<p>${product.description}</p>
+<div style="white-space: pre-line;">${product.description}</div>
 
 <p><b>Category:</b> ${product.category}</p>
 
