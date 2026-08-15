@@ -60,6 +60,46 @@ color:white;
 <body>
 
 <div id="productContainer"></div>
+<section class="reviewsSection">
+
+  <h2>⭐ Customer Reviews</h2>
+
+  <div id="reviewsList">
+    <p>Loading reviews...</p>
+  </div>
+
+  <div class="reviewForm">
+
+    <h3>Write a Review</h3>
+
+    <input
+      type="text"
+      id="reviewName"
+      placeholder="Your Name"
+      maxlength="50"
+    >
+
+    <select id="reviewRating">
+      <option value="5">★★★★★ - 5 Stars</option>
+      <option value="4">★★★★☆ - 4 Stars</option>
+      <option value="3">★★★☆☆ - 3 Stars</option>
+      <option value="2">★★☆☆☆ - 2 Stars</option>
+      <option value="1">★☆☆☆☆ - 1 Star</option>
+    </select>
+
+    <textarea
+      id="reviewText"
+      placeholder="Write your review..."
+      maxlength="500"
+    ></textarea>
+
+    <button id="submitReview">
+      Submit Review
+    </button>
+
+  </div>
+
+</section>
 
 <script type="module" src="product-details.js"></script>
 
