@@ -62,15 +62,47 @@ color:white;
 <div id="productContainer"></div>
 <section class="reviewsSection">
 
-  <h2>⭐ Customer Reviews</h2>
+  <div class="reviewsHeader">
+
+    <div>
+      <h2>Customer Reviews</h2>
+
+      <div class="ratingSummary">
+
+        <span id="averageRating">0.0</span>
+
+        <span class="ratingStars" id="averageStars">
+          ☆☆☆☆☆
+        </span>
+
+        <span id="reviewCount">
+          (0 Reviews)
+        </span>
+
+      </div>
+
+    </div>
+
+    <button id="writeReviewBtn">
+      Write a Review
+    </button>
+
+  </div>
+
 
   <div id="reviewsList">
     <p>Loading reviews...</p>
   </div>
 
-  <div class="reviewForm">
+
+  <div
+    class="reviewForm"
+    id="reviewForm"
+    style="display:none;"
+  >
 
     <h3>Write a Review</h3>
+
 
     <input
       type="text"
@@ -79,19 +111,38 @@ color:white;
       maxlength="50"
     >
 
+
     <select id="reviewRating">
-      <option value="5">★★★★★ - 5 Stars</option>
-      <option value="4">★★★★☆ - 4 Stars</option>
-      <option value="3">★★★☆☆ - 3 Stars</option>
-      <option value="2">★★☆☆☆ - 2 Stars</option>
-      <option value="1">★☆☆☆☆ - 1 Star</option>
+
+      <option value="5">
+        ★★★★★ - 5 Stars
+      </option>
+
+      <option value="4">
+        ★★★★☆ - 4 Stars
+      </option>
+
+      <option value="3">
+        ★★★☆☆ - 3 Stars
+      </option>
+
+      <option value="2">
+        ★★☆☆☆ - 2 Stars
+      </option>
+
+      <option value="1">
+        ★☆☆☆☆ - 1 Star
+      </option>
+
     </select>
+
 
     <textarea
       id="reviewText"
       placeholder="Write your review..."
       maxlength="500"
     ></textarea>
+
 
     <button id="submitReview">
       Submit Review
