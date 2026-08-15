@@ -644,3 +644,133 @@ padding:8px;
     color:#444;
     font-size:15px;
 }
+.reviewsSection{
+  max-width:1000px;
+  margin:25px auto 50px;
+  padding:25px;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.reviewsHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding-bottom:20px;
+  border-bottom:1px solid #eee;
+}
+
+.reviewsHeader h2{
+  font-size:24px;
+  margin-bottom:8px;
+}
+
+.ratingSummary{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+#averageRating{
+  font-size:25px;
+  font-weight:700;
+  color:#f59e0b;
+}
+
+.ratingStars{
+  font-size:20px;
+  color:#f59e0b;
+  letter-spacing:2px;
+}
+
+#reviewCount{
+  color:#666;
+  font-size:14px;
+}
+
+#writeReviewBtn{
+  background:#ff6a00;
+  color:#fff;
+  border:none;
+  padding:11px 18px;
+  border-radius:7px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.review{
+  padding:18px 0;
+  border-bottom:1px solid #eee;
+}
+
+.reviewName{
+  font-weight:700;
+  font-size:16px;
+}
+
+.reviewStars{
+  color:#f59e0b;
+  font-size:18px;
+  margin:5px 0;
+}
+
+.reviewText{
+  color:#444;
+  line-height:1.5;
+}
+
+.reviewForm{
+  margin-top:25px;
+  padding-top:20px;
+  border-top:1px solid #eee;
+}
+
+.reviewForm input,
+.reviewForm select,
+.reviewForm textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:15px;
+}
+
+.reviewForm textarea{
+  height:110px;
+  resize:vertical;
+}
+
+#submitReview{
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  padding:12px 20px;
+  border-radius:7px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+@media(max-width:768px){
+
+  .reviewsSection{
+    margin:20px 12px 40px;
+    padding:18px;
+  }
+
+  .reviewsHeader{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  #writeReviewBtn{
+    width:100%;
+  }
+
+  .reviewsHeader h2{
+    font-size:21px;
+  }
+
+}
