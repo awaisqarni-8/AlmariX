@@ -236,6 +236,30 @@ async function loadProduct() {
                   `
                   : ""
               }
+               
+               
+                ${
+                product.color3
+                  ? `
+                    <option value="${product.color3}">
+                      ${product.color3}
+                    </option>
+                  `
+                  : ""
+              }
+
+
+                ${
+                product.color4
+                  ? `
+                    <option value="${product.color4}">
+                      ${product.color4}
+                    </option>
+                  `
+                  : ""
+              }
+
+
 
             </select>
 
