@@ -131,30 +131,7 @@ async function loadProduct() {
 
           <h2>
             PKR ${product.price || 0}
-          </h2>
-
-
-          <div class="productDescription">
-
-            ${
-              product.description
-                ? product.description
-                    .split("\n")
-                    .filter(line => line.trim() !== "")
-                    .map(line => {
-
-                      const text =
-                        line.replace(/^•\s*/, "").trim();
-
-                      return `<p>• ${text}</p>`;
-
-                    })
-                    .join("")
-                : "<p>No description available.</p>"
-            }
-
-          </div>
-
+          </h2>  
 
           <p>
             <b>Category:</b>
@@ -282,6 +259,27 @@ async function loadProduct() {
           >
             Buy Now
           </button>
+<div class="productDescription">
+
+            ${
+              product.description
+                ? product.description
+                    .split("\n")
+                    .filter(line => line.trim() !== "")
+                    .map(line => {
+
+                      const text =
+                        line.replace(/^•\s*/, "").trim();
+
+                      return `<p>• ${text}</p>`;
+
+                    })
+                    .join("")
+                : "<p>No description available.</p>"
+            }
+
+          </div>
+
 
 
         </div>
