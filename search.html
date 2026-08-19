@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Search Products | AlmariX</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:#f5f6fa;
+font-family:Poppins,sans-serif;
+margin:0;
+}
+
+.searchContainer{
+max-width:1100px;
+margin:40px auto;
+padding:25px;
+}
+
+.searchBox{
+display:flex;
+gap:10px;
+margin-bottom:30px;
+}
+
+.searchBox input{
+flex:1;
+padding:15px 18px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:16px;
+outline:none;
+}
+
+.searchBox button{
+padding:15px 25px;
+border:0;
+border-radius:12px;
+background:#ff6a00;
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+
+.searchTitle{
+font-size:28px;
+margin-bottom:25px;
+}
+
+.productGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:22px;
+}
+
+.productCard{
+background:white;
+padding:15px;
+border-radius:16px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+cursor:pointer;
+}
+
+.productCard img{
+width:100%;
+height:230px;
+object-fit:cover;
+border-radius:12px;
+}
+
+.productCard h3{
+font-size:16px;
+margin:12px 0 7px;
+}
+
+.productCard p{
+color:#ff6a00;
+font-weight:700;
+}
+
+.noResults{
+text-align:center;
+padding:50px;
+color:#777;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="searchContainer">
+
+<div class="searchBox">
+
+<input
+type="search"
+id="searchInput"
+placeholder="Search products..."
+autocomplete="off"
+>
+
+<button id="searchBtn">
+Search
+</button>
+
+</div>
+
+<h1 class="searchTitle">
+Search Results
+</h1>
+
+<div
+class="productGrid"
+id="productGrid"
+>
+</div>
+
+</div>
+
+
+<script type="module">
+
+import { db } from "./firebase.js";
+
+import {
+collection,
+getDocs
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+
+const searchInput =
+document.getElementById("searchInput");
+
+const searchBtn =
+document.getElementById("searchBtn");
+
+const productGrid =
+document.getElementById("productGrid");
+
+
+let products=[];
+
+
+/* LOAD FIREBASE PRODUCTS */
+
+async function loadProducts(){
+
+try{
+
+const snapshot =
+await getDocs(
+collection(db,"products")
+);
+
+products=[];
+
+snapshot.forEach((doc)=>{
+
+products.push({
+
+id:doc.id,
+
+...doc.data()
+
+});
+
+});
+
+}catch(error){
+
+console.error(error);
+
+productGrid.innerHTML=`
+
+<div class="noResults">
+Unable to load products.
+</div>
+
+`;
+
+}
+
+}
+
+
+/* SEARCH */
+
+function searchProducts(){
+
+const search =
+searchInput.value
+.trim()
+.toLowerCase();
+
+
+if(!search){
+
+productGrid.innerHTML=`
+
+<div class="noResults">
+Type a product name to search.
+</div>
+
+`;
+
+return;
+
+}
+
+
+const results =
+products.filter((product)=>{
+
+const name =
+String(product.name || "")
+.toLowerCase();
+
+const category =
+String(product.category || "")
+.toLowerCase();
+
+const description =
+String(product.description || "")
+.toLowerCase();
+
+
+return (
+
+name.includes(search) ||
+
+category.includes(search) ||
+
+description.includes(search)
+
+);
+
+});
+
+
+renderProducts(results);
+
+}
+
+
+/* SHOW PRODUCTS */
+
+function renderProducts(results){
+
+productGrid.innerHTML="";
+
+
+if(results.length===0){
+
+productGrid.innerHTML=`
+
+<div class="noResults">
+
+<h2>
+No Products Found
+</h2>
+
+<p>
+Try another product name.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+results.forEach((product)=>{
+
+productGrid.innerHTML += `
+
+<div
+class="productCard"
+data-id="${product.id}"
+>
+
+<img
+src="${product.image || ""}"
+alt="${escapeHTML(product.name || "Product")}"
+>
+
+<h3>
+${escapeHTML(product.name || "Product")}
+</h3>
+
+<p>
+PKR ${
+Number(product.price || 0)
+.toLocaleString()
+}
+</p>
+
+</div>
+
+`;
+
+});
+
+
+document
+.querySelectorAll(".productCard")
+.forEach((card)=>{
+
+card.addEventListener("click",()=>{
+
+window.location.href =
+"product.html?id=" +
+encodeURIComponent(
+card.dataset.id
+);
+
+});
+
+});
+
+}
+
+
+/* BUTTON */
+
+searchBtn.addEventListener(
+"click",
+searchProducts
+);
+
+
+/* ENTER KEY */
+
+searchInput.addEventListener(
+"keydown",
+(e)=>{
+
+if(e.key==="Enter"){
+
+searchProducts();
+
+}
+
+});
+
+
+/* SECURITY */
+
+function escapeHTML(value){
+
+return String(value)
+
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* START */
+
+loadProducts();
+
+</script>
+
+</body>
+
+</html>
