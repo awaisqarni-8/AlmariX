@@ -253,6 +253,15 @@
   <script src="script.js"></script>
   <script type="module" src="product.js"></script>
   <script type="module" src="admin-access.js"></script>
+ <script>
+document.getElementById("searchBtn").addEventListener("click", function () {
+  const search = document.getElementById("searchInput").value.trim();
+
+  window.location.href =
+    "search.html" +
+    (search ? "?q=" + encodeURIComponent(search) : "");
+});
+</script>
 
 </body>
 </html>
