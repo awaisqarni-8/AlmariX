@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="robots" content="noindex, nofollow">
+
+<title>Wishlist | AlmariX</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+background:#f4f6f9;
+font-family:'Poppins',sans-serif;
+color:#111827;
+}
+
+.wishlistContainer{
+max-width:1100px;
+margin:40px auto;
+background:#fff;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.wishlistTitle{
+font-size:32px;
+font-weight:700;
+margin:0 0 30px;
+}
+
+.wishlistGrid{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(230px,1fr));
+gap:25px;
+}
+
+.wishCard{
+background:#fafafa;
+border-radius:18px;
+padding:18px;
+text-align:center;
+box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+.wishCard img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+.wishCard h3{
+margin:0 0 10px;
+font-size:17px;
+}
+
+.wishCard p{
+color:#ff6a00;
+font-weight:700;
+margin:0 0 15px;
+}
+
+.wishBtn{
+width:100%;
+padding:13px;
+border:none;
+border-radius:10px;
+background:#ff6a00;
+color:#fff;
+font-size:15px;
+font-weight:600;
+cursor:pointer;
+margin-bottom:10px;
+}
+
+.removeWish{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#ef4444;
+color:#fff;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+}
+
+.emptyWishlist{
+text-align:center;
+padding:70px 20px;
+}
+
+.emptyWishlist h2{
+margin-bottom:8px;
+}
+
+.emptyWishlist p{
+color:#6b7280;
+}
+
+.shopBtn{
+display:inline-block;
+margin-top:15px;
+padding:12px 25px;
+background:#ff6a00;
+color:#fff;
+text-decoration:none;
+border-radius:9px;
+font-weight:600;
+}
+
+@media(max-width:600px){
+
+.wishlistContainer{
+margin:20px 12px;
+padding:20px;
+}
+
+.wishlistTitle{
+font-size:27px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="wishlistContainer">
+
+<h1 class="wishlistTitle">
+❤️ My Wishlist
+</h1>
+
+<div
+class="wishlistGrid"
+id="wishlistGrid"
+>
+</div>
+
+</div>
+
+
+<script type="module">
+
+import { auth } from "./firebase.js";
+
+import {
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+
+const wishlistGrid =
+document.getElementById("wishlistGrid");
+
+
+onAuthStateChanged(auth,(user)=>{
+
+if(!user){
+
+window.location.href="login.html";
+
+return;
+
+}
+
+renderWishlist();
+
+});
+
+
+/* =========================
+   LOAD WISHLIST
+========================= */
+
+function getWishlist(){
+
+return JSON.parse(
+localStorage.getItem("wishlist")
+) || [];
+
+}
+
+
+/* =========================
+   SAVE WISHLIST
+========================= */
+
+function saveWishlist(wishlist){
+
+localStorage.setItem(
+"wishlist",
+JSON.stringify(wishlist)
+);
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function renderWishlist(){
+
+const wishlist =
+getWishlist();
+
+
+wishlistGrid.innerHTML="";
+
+
+if(wishlist.length===0){
+
+wishlistGrid.innerHTML=`
+
+<div
+class="emptyWishlist"
+style="grid-column:1/-1;"
+>
+
+<h2>
+Your Wishlist is Empty
+</h2>
+
+<p>
+Save your favorite products here.
+</p>
+
+<a
+href="index.html"
+class="shopBtn"
+>
+Continue Shopping
+</a>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+wishlist.forEach((product,index)=>{
+
+wishlistGrid.innerHTML += `
+
+<div class="wishCard">
+
+<img
+src="${product.image || ""}"
+alt="${escapeHTML(
+product.name || "Product"
+)}"
+>
+
+<h3>
+${escapeHTML(
+product.name || "Product"
+)}
+</h3>
+
+<p>
+PKR ${
+Number(product.price || 0)
+.toLocaleString()
+}
+</p>
+
+<button
+class="wishBtn"
+data-index="${index}"
+>
+Add to Cart
+</button>
+
+<button
+class="removeWish"
+data-index="${index}"
+>
+Remove
+</button>
+
+</div>
+
+`;
+
+});
+
+
+}
+
+
+/* =========================
+   BUTTON ACTIONS
+========================= */
+
+wishlistGrid.addEventListener(
+"click",
+(e)=>{
+
+
+/* ADD TO CART */
+
+const addButton =
+e.target.closest(".wishBtn");
+
+
+if(addButton){
+
+const index =
+Number(addButton.dataset.index);
+
+
+const wishlist =
+getWishlist();
+
+
+const product =
+wishlist[index];
+
+
+let cart =
+JSON.parse(
+localStorage.getItem("cart")
+) || [];
+
+
+/* Don't duplicate same product */
+
+const existing =
+cart.find(
+(item)=>item.id === product.id
+);
+
+
+if(existing){
+
+existing.qty =
+(Number(existing.qty)||1) + 1;
+
+}else{
+
+cart.push({
+
+id:product.id,
+
+name:product.name,
+
+price:product.price,
+
+image:product.image,
+
+qty:1,
+
+selectedSize:
+product.selectedSize || "",
+
+selectedColor:
+product.selectedColor || ""
+
+});
+
+}
+
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+
+alert(
+"✅ Product Added To Cart"
+);
+
+}
+
+
+/* REMOVE FROM WISHLIST */
+
+const removeButton =
+e.target.closest(".removeWish");
+
+
+if(removeButton){
+
+const index =
+Number(removeButton.dataset.index);
+
+
+const wishlist =
+getWishlist();
+
+
+wishlist.splice(index,1);
+
+
+saveWishlist(wishlist);
+
+
+renderWishlist();
+
+
+}
+
+});
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(value){
+
+return String(value)
+
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+</script>
+
+</body>
+
+</html>
