@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+
+<title>My Orders | AlmariX</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+background:#f5f6fa;
+font-family:'Poppins',sans-serif;
+color:#111827;
+}
+
+.ordersContainer{
+max-width:1100px;
+margin:40px auto;
+background:#fff;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.ordersTitle{
+font-size:32px;
+font-weight:700;
+margin:0 0 30px;
+}
+
+.orderCard{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+padding:20px;
+border:1px solid #eee;
+border-radius:16px;
+margin-bottom:18px;
+}
+
+.orderLeft{
+display:flex;
+align-items:center;
+gap:18px;
+min-width:0;
+}
+
+.orderImage{
+width:90px;
+height:90px;
+object-fit:cover;
+border-radius:12px;
+background:#eee;
+}
+
+.orderInfo{
+min-width:0;
+}
+
+.orderInfo h3{
+margin:0 0 7px;
+font-size:18px;
+}
+
+.orderInfo p{
+margin:4px 0;
+color:#666;
+font-size:14px;
+}
+
+.orderPrice{
+color:#ff6a00 !important;
+font-weight:700;
+}
+
+.status{
+display:inline-block;
+padding:7px 15px;
+border-radius:20px;
+font-size:13px;
+font-weight:600;
+color:#fff;
+}
+
+.pending{
+background:#f59e0b;
+}
+
+.processing{
+background:#3b82f6;
+}
+
+.shipped{
+background:#8b5cf6;
+}
+
+.delivered{
+background:#22c55e;
+}
+
+.cancelled{
+background:#ef4444;
+}
+
+.orderBtn{
+margin-top:10px;
+padding:10px 18px;
+border:none;
+border-radius:9px;
+background:#2563eb;
+color:#fff;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+}
+
+.emptyOrders{
+text-align:center;
+padding:70px 20px;
+}
+
+.emptyOrders h2{
+font-size:24px;
+margin-bottom:8px;
+}
+
+.emptyOrders p{
+color:#6b7280;
+margin-bottom:20px;
+}
+
+.shopBtn{
+display:inline-block;
+padding:12px 25px;
+border-radius:9px;
+background:#ff6a00;
+color:#fff;
+text-decoration:none;
+font-weight:600;
+}
+
+.orderDetails{
+margin-top:12px;
+padding:12px;
+background:#f8fafc;
+border-radius:10px;
+font-size:13px;
+color:#555;
+}
+
+@media(max-width:700px){
+
+.ordersContainer{
+margin:20px 12px;
+padding:20px;
+}
+
+.ordersTitle{
+font-size:27px;
+}
+
+.orderCard{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.orderLeft{
+width:100%;
+}
+
+.orderImage{
+width:75px;
+height:75px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="ordersContainer">
+
+<h1 class="ordersTitle">
+📦 My Orders
+</h1>
+
+<div id="ordersList">
+
+<p>Loading orders...</p>
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+import { auth, db } from "./firebase.js";
+
+import {
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+import {
+collection,
+query,
+where,
+orderBy,
+getDocs
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+
+const ordersList =
+document.getElementById("ordersList");
+
+
+/* =========================
+   AUTHENTICATION
+========================= */
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(!user){
+
+window.location.href="login.html";
+
+return;
+
+}
+
+await loadOrders(user);
+
+});
+
+
+/* =========================
+   LOAD REAL ORDERS
+========================= */
+
+async function loadOrders(user){
+
+try{
+
+
+const ordersRef =
+collection(db,"orders");
+
+
+const q =
+query(
+
+ordersRef,
+
+where(
+"customer.email",
+"==",
+user.email
+),
+
+orderBy(
+"createdAt",
+"desc"
+)
+
+);
+
+
+const snapshot =
+await getDocs(q);
+
+
+if(snapshot.empty){
+
+ordersList.innerHTML = `
+
+<div class="emptyOrders">
+
+<h2>No Orders Yet</h2>
+
+<p>
+Your orders will appear here after you place an order.
+</p>
+
+<a
+href="index.html"
+class="shopBtn"
+>
+Start Shopping
+</a>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+ordersList.innerHTML="";
+
+
+snapshot.forEach((orderDoc)=>{
+
+const order =
+orderDoc.data();
+
+
+const items =
+order.items || [];
+
+
+const status =
+(order.status || "Pending")
+.toLowerCase();
+
+
+let statusClass =
+"pending";
+
+
+if(status==="processing"){
+statusClass="processing";
+}
+
+else if(status==="shipped"){
+statusClass="shipped";
+}
+
+else if(status==="delivered"){
+statusClass="delivered";
+}
+
+else if(status==="cancelled"){
+statusClass="cancelled";
+}
+
+
+const firstItem =
+items[0] || {};
+
+
+const productCount =
+items.length;
+
+
+const productName =
+productCount > 1
+
+? `${escapeHTML(firstItem.name || "Product")} + ${productCount - 1} more`
+
+: escapeHTML(
+firstItem.name || "Product"
+);
+
+
+const productImage =
+firstItem.image || "";
+
+
+const total =
+Number(order.total) || 0;
+
+
+const orderDate =
+order.createdAt?.toDate
+
+? order.createdAt
+.toDate()
+.toLocaleDateString()
+
+: "Recent";
+
+
+ordersList.innerHTML += `
+
+<div class="orderCard">
+
+
+<div class="orderLeft">
+
+<img
+class="orderImage"
+src="${productImage}"
+alt="${productName}"
+>
+
+
+<div class="orderInfo">
+
+<h3>
+${productName}
+</h3>
+
+<p>
+Order #${orderDoc.id}
+</p>
+
+<p>
+Date: ${orderDate}
+</p>
+
+<p class="orderPrice">
+Total: PKR ${total.toLocaleString()}
+</p>
+
+<p>
+${productCount}
+${productCount === 1 ? "Product" : "Products"}
+</p>
+
+</div>
+
+</div>
+
+
+<div>
+
+<span class="status ${statusClass}">
+${escapeHTML(
+order.status || "Pending"
+)}
+</span>
+
+<br>
+
+<button
+class="orderBtn"
+data-id="${orderDoc.id}"
+>
+View Details
+</button>
+
+</div>
+
+
+</div>
+
+`;
+
+});
+
+
+/* =========================
+   VIEW DETAILS
+========================= */
+
+document
+.querySelectorAll(".orderBtn")
+.forEach((button)=>{
+
+button.addEventListener(
+"click",
+()=>{
+
+const orderId =
+button.dataset.id;
+
+
+window.location.href =
+"order-details.html?id=" +
+encodeURIComponent(orderId);
+
+});
+
+});
+
+
+}catch(error){
+
+console.error(
+"Orders error:",
+error
+);
+
+ordersList.innerHTML = `
+
+<div class="emptyOrders">
+
+<h2>Unable to Load Orders</h2>
+
+<p>
+Please try again later.
+</p>
+
+</div>
+
+`;
+
+}
+
+}
+
+
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHTML(value){
+
+return String(value)
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
+
+}
+
+</script>
+
+</body>
+
+</html>
