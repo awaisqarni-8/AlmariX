@@ -12,7 +12,6 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
-document.getElementById("reviewsSection").style.display = "block";
 let product = {};
 
 const params = new URLSearchParams(window.location.search);
