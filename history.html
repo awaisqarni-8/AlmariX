@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="robots" content="noindex, nofollow">
+
+<title>History | AlmariX</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+background:#f5f6fa;
+font-family:'Poppins',sans-serif;
+color:#111827;
+}
+
+.historyContainer{
+max-width:1100px;
+margin:40px auto;
+background:#fff;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.historyTitle{
+font-size:32px;
+font-weight:700;
+margin:0 0 30px;
+}
+
+.historyItem{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+padding:18px 0;
+border-bottom:1px solid #eee;
+}
+
+.historyLeft{
+display:flex;
+align-items:center;
+gap:18px;
+min-width:0;
+}
+
+.historyImage{
+width:85px;
+height:85px;
+object-fit:cover;
+border-radius:12px;
+background:#eee;
+}
+
+.historyInfo h3{
+margin:0 0 7px;
+font-size:17px;
+}
+
+.historyInfo p{
+margin:3px 0;
+color:#ff6a00;
+font-weight:600;
+}
+
+.historyDate{
+font-size:13px;
+color:#888;
+white-space:nowrap;
+}
+
+.clearBtn{
+padding:12px 22px;
+border:none;
+border-radius:10px;
+background:#ef4444;
+color:#fff;
+font-size:15px;
+font-weight:600;
+cursor:pointer;
+margin-top:25px;
+}
+
+.emptyHistory{
+text-align:center;
+padding:70px 20px;
+}
+
+.emptyHistory h2{
+margin-bottom:8px;
+}
+
+.emptyHistory p{
+color:#6b7280;
+}
+
+.shopBtn{
+display:inline-block;
+margin-top:15px;
+padding:12px 25px;
+background:#ff6a00;
+color:#fff;
+text-decoration:none;
+border-radius:9px;
+font-weight:600;
+}
+
+@media(max-width:650px){
+
+.historyContainer{
+margin:20px 12px;
+padding:20px;
+}
+
+.historyTitle{
+font-size:27px;
+}
+
+.historyItem{
+align-items:flex-start;
+}
+
+.historyImage{
+width:70px;
+height:70px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="historyContainer">
+
+<h1 class="historyTitle">
+🕘 Recently Viewed
+</h1>
+
+<div id="historyList"></div>
+
+<button
+class="clearBtn"
+id="clearHistory"
+style="display:none;"
+>
+Clear History
+</button>
+
+</div>
+
+
+<script type="module">
+
+import { auth } from "./firebase.js";
+
+import {
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+
+const historyList =
+document.getElementById("historyList");
+
+const clearButton =
+document.getElementById("clearHistory");
+
+
+onAuthStateChanged(auth,(user)=>{
+
+if(!user){
+
+window.location.href="login.html";
+
+return;
+
+}
+
+loadHistory();
+
+});
+
+
+function loadHistory(){
+
+const history =
+JSON.parse(
+localStorage.getItem("recentlyViewed")
+) || [];
+
+
+historyList.innerHTML="";
+
+
+if(history.length===0){
+
+clearButton.style.display="none";
+
+historyList.innerHTML=`
+
+<div class="emptyHistory">
+
+<h2>
+No Recently Viewed Products
+</h2>
+
+<p>
+Products you view will appear here.
+</p>
+
+<a
+href="index.html"
+class="shopBtn"
+>
+Continue Shopping
+</a>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+clearButton.style.display="block";
+
+
+history.forEach((product)=>{
+
+const date =
+product.viewedAt
+?
+new Date(
+product.viewedAt
+).toLocaleDateString()
+:
+"Recently";
+
+
+historyList.innerHTML += `
+
+<div
+class="historyItem"
+onclick="
+window.location.href='product.html?id=${encodeURIComponent(product.id)}'
+"
+style="cursor:pointer;"
+>
+
+<div class="historyLeft">
+
+<img
+class="historyImage"
+src="${product.image || ""}"
+alt="${product.name || "Product"}"
+>
+
+<div class="historyInfo">
+
+<h3>
+${escapeHTML(
+product.name || "Product"
+)}
+</h3>
+
+<p>
+PKR ${
+Number(product.price || 0)
+.toLocaleString()
+}
+</p>
+
+</div>
+
+</div>
+
+<span class="historyDate">
+${date}
+</span>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+clearButton.addEventListener(
+"click",
+()=>{
+
+localStorage.removeItem(
+"recentlyViewed"
+);
+
+loadHistory();
+
+alert(
+"✅ History cleared successfully."
+);
+
+});
+
+
+function escapeHTML(value){
+
+return String(value)
+
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+</script>
+
+</body>
+
+</html>
