@@ -510,3 +510,40 @@ a {
   font-weight: 700;
   color: #ff6a00;
 }
+/* ========== 40% Discount Styles ========== */
+.img-wrapper {
+  position: relative;
+}
+
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ef4444;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 5px;
+  z-index: 2;
+}
+
+.price-box {
+  padding: 0 16px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.old-price {
+  font-size: 14px;
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
+.new-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff6a00;
+}
