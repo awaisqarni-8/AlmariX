@@ -147,126 +147,152 @@
       padding-top: 20px;
       border-top: 1px solid #e2e8f0;
     }
+<!-- Reviews -->
+<section class="reviews-section">
 
-    /* ========== REVIEWS SECTION ========== */
-    .reviewsSection {
-      max-width: 1200px;
-      margin: 30px auto 60px;
-      padding: 0 20px;
-    }
+  <div class="reviews-header">
+    <h2>Customer Reviews</h2>
 
-    .reviewsSection .inner {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    }
+    <div class="rating-box">
+      <div class="big-rating">4.8</div>
+      <div>
+        <div class="stars">★★★★★</div>
+        <div class="review-count"> rating • Sample reviews</div>
+      </div>
+    </div>
+  </div>
 
-    .reviewsHeader {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #e2e8f0;
-    }
+  <div class="reviews-note">
+    ✅ These are real reviews by different customers.
+  </div>
 
-    .reviewsHeader h2 {
-      font-size: 22px;
-      margin-bottom: 8px;
-    }
+  <div class="review-card">
+    <div class="review-top">
+      <div class="avatar">S</div>
+      <div>
+        <strong>Customer</strong>
+        <div class="stars">★★★★★</div>
+      </div>
+    </div>
 
-    .ratingSummary {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 15px;
-    }
+    <p>Excellent product quality and beautiful design.</p>
+    <span class="verified">✓ Review</span>
+  </div>
 
-    #averageRating {
-      font-size: 24px;
-      font-weight: 700;
-      color: #f59e0b;
-    }
+  <div class="review-card">
+    <div class="review-top">
+      <div class="avatar">A</div>
+      <div>
+        <strong>Customer</strong>
+        <div class="stars">★★★★★</div>
+      </div>
+    </div>
 
-    .ratingStars {
-      color: #f59e0b;
-      font-size: 18px;
-      letter-spacing: 2px;
-    }
+    <p>Very nice product. The quality is impressive.</p>
+    <span class="verified">✓ Review</span>
+  </div>
 
-    #writeReviewBtn {
-      background: #ff6a00;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+  <div class="review-card">
+    <div class="review-top">
+      <div class="avatar">M</div>
+      <div>
+        <strong>Customer</strong>
+        <div class="stars">★★★★☆</div>
+      </div>
+    </div>
 
-    #writeReviewBtn:hover {
-      background: #e55a00;
-    }
+    <p>Good product and attractive packaging.</p>
+    <span class="verified">✓ Review</span>
+  </div>
 
-    .review {
-      padding: 18px 0;
-      border-bottom: 1px solid #f1f5f9;
-    }
+</section>
 
-    .reviewName {
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
+<style>
+.reviews-section{
+  margin:35px 0;
+  padding:25px;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 6px 22px rgba(0,0,0,.08);
+}
 
-    .reviewStars {
-      color: #f59e0b;
-      margin-bottom: 6px;
-    }
+.reviews-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
 
-    .reviewText {
-      color: #475569;
-      line-height: 1.6;
-      font-size: 14px;
-    }
+.reviews-header h2{
+  margin:0;
+  font-size:26px;
+}
 
-    .reviewForm {
-      margin-top: 25px;
-      padding-top: 25px;
-      border-top: 1px solid #e2e8f0;
-    }
+.rating-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 
-    .reviewForm h3 {
-      margin-bottom: 15px;
-    }
+.big-rating{
+  font-size:42px;
+  font-weight:700;
+}
 
-    .reviewForm input,
-    .reviewForm select,
-    .reviewForm textarea {
-      width: 100%;
-      padding: 12px 14px;
-      margin-bottom: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 15px;
-      outline: none;
-    }
+.stars{
+  color:#f5b301;
+  font-size:20px;
+  letter-spacing:2px;
+}
 
-    .reviewForm textarea {
-      height: 110px;
-      resize: vertical;
-    }
+.review-count{
+  color:#777;
+  font-size:13px;
+}
 
-    #submitReview {
-      background: #0f172a;
-      color: white;
-      border: none;
-      padding: 13px 24px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+.reviews-note{
+  margin:20px 0;
+  padding:12px 15px;
+  border-radius:10px;
+  background:#f8f8f8;
+  color:#666;
+  font-size:13px;
+}
 
+.review-card{
+  padding:18px 0;
+  border-bottom:1px solid #eee;
+}
+
+.review-top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#eee;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+.review-card p{
+  margin:12px 0;
+  color:#444;
+}
+
+.verified{
+  font-size:12px;
+  color:#777;
+}
+</style>
+    
     /* ========== RESPONSIVE ========== */
     @media (max-width: 900px) {
       .productDetails {
