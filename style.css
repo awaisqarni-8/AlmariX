@@ -674,3 +674,34 @@ a {
     min-height: 55px;
   }
 }
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  background-color: #0d3835;
+  padding: 20px;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  text-align: center;
+}
+
+.btn-cart {
+  background-color: transparent;
+  color: #ff6a00;
+  border: 1.5px solid #ff6a00;
+}
+
+.btn-buy {
+  background-color: #ff6a00;
+  color: #ffffff;
+}
